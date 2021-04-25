@@ -36,11 +36,15 @@ def single_page_links(url):
 
     # 获取所有<a>标签中的href对应的值，即超链接
     for a in a_labels:
+        urls = []
         url = str(a.get('href'))
         if url.startswith('/book2/'):
-            print('https://wap.jjwxc.net' + url)
+            # print('https://wap.jjwxc.net' + url)
+            urls.append('https://wap.jjwxc.net' + url)
+
     # print(a.get('href'))
+    return urls
 
 
 if __name__ == '__main__':
-    single_page_links()
+    single_page_links('https://wap.jjwxc.net/ranks/recommend/noyq')
