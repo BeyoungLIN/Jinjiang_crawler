@@ -33,4 +33,4 @@ def run_crawl(start_page, end_page, root_url):
 
 if __name__ == '__main__':
     jinjiang_wap = 'https://wap.jjwxc.net/ranks/recommend/noyq'
-    run_crawl(0, 2, jinjiang_wap)
+    run_crawl(0, 44, jinjiang_wap)
