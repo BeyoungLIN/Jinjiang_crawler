@@ -22,9 +22,10 @@ def run_crawl(start_page, end_page, root_url):
     '''
     for page_num in range(start_page, end_page):
         url = root_url + '/' + str(page_num)  # 填写根url时不应该有'/'
+        # print(url)
 
         single_page_urls = single_page_links(url)
-        print(single_page_urls)
+        # print(single_page_urls)
         for book_url in single_page_urls:
             print(book_url)
             run_whole_book(book_url, 'gb18030')

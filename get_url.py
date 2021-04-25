@@ -35,16 +35,18 @@ def single_page_links(url):
     a_labels = soup.find_all('a', attrs={'href': True})
 
     # 获取所有<a>标签中的href对应的值，即超链接
+    urls = []
     for a in a_labels:
-        urls = []
         url = str(a.get('href'))
+        # print(a.get('href'))
         if url.startswith('/book2/'):
+            # book_url = 'https://wap.jjwxc.net' + url
             # print('https://wap.jjwxc.net' + url)
             urls.append('https://wap.jjwxc.net' + url)
 
-    # print(a.get('href'))
+    # print(urls)
     return urls
 
 
 if __name__ == '__main__':
-    single_page_links('https://wap.jjwxc.net/ranks/recommend/noyq')
+    single_page_links('https://wap.jjwxc.net/ranks/recommend/noyq/0')

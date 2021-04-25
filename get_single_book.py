@@ -5,7 +5,7 @@
 # @File   : get_single_book.py
 
 import os
-
+import tqdm
 import requests
 from bs4 import BeautifulSoup
 
@@ -26,7 +26,7 @@ def jinjiang_novel_content(chap_url, encode='utf-8'):
     content.replace('&nbsp;', '\n').replace("&emsp;", "  ")
     # content = '\n'.join(content[0].text.split())
     # print('\n'.join(content[0].text.split()))
-    print(content)
+    # print(content)
     return content
 
 def jinjiang_novel_content_14(chap_url, encode='utf-8'):
@@ -37,13 +37,11 @@ def jinjiang_novel_content_14(chap_url, encode='utf-8'):
     soup = BeautifulSoup(res.text, "lxml")
     content = soup.select_one(
         'body > div.grid-c > div > div:nth-child(14) > div:nth-child(2) > ul > li:nth-child(1)').text
-    # body > div.grid-c > div > div:nth-child(14) > div:nth-child(2) > ul > li
-    # body > div.grid-c > div > div:nth-child(14) > div:nth-child(2) > ul > li:nth-child(1)
-    # body > div.grid - c > div > div: nth - child(14) > div:nth - child(2) > ul > li: nth - child(1)
+
     content.replace('&nbsp;', '\n').replace("&emsp;", "  ")
     # content = '\n'.join(content[0].text.split())
     # print('\n'.join(content[0].text.split()))
-    print(content)
+    # print(content)
     return content
 
 
@@ -63,14 +61,15 @@ def whole_chaps_num(book_url, encode='utf-8'):
 
 def run_whole_book(book_url, encode='utf-8'):
     novel_title = page_title(book_url, encode)
-    # print(novel_folder_name)
+    print(novel_title)
     novel_folder_name = '晋江小说合集/' + novel_title
     if not os.path.exists(novel_folder_name):
         os.mkdir(novel_folder_name)
 
     all_chaps = whole_chaps_num(book_url, encode)
 
-    for chap_num in range(25, all_chaps):
+    for chap_num in range(1, all_chaps):
+    # for chap_num in tqdm(range(1, all_chaps)):
         chap = book_url + '/' + str(chap_num)
         try:
             res = jinjiang_novel_content(chap, encode)
@@ -81,6 +80,7 @@ def run_whole_book(book_url, encode='utf-8'):
                 print(chap_num)
                 break
         # res = jinjiang_novel_content(chap, encode)
+        print('Chapter ' + str(chap_num))
         with open(novel_folder_name + '/Chapter ' + str(chap_num) + '.txt', 'w', encoding='utf-8') as f:
             f.write(res)
 
