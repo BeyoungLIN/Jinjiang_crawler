@@ -48,8 +48,9 @@ def whole_chaps_num(book_url, encode='utf-8'):
         try:
             chaps_nums = soup.select_one(
                 'body > div.grid-c > div:nth-child(11) > div:nth-child(3) > a:nth-child(20) > span:nth-child(1)').text
+            # body > div.grid - c > div: nth - child(11) > div:nth - child(3) > a: nth - child(19) > span
         except:
-            chaps_nums = 100
+            chaps_nums = str(100)
     chaps_nums = chaps_nums.replace('.', '')
     chaps_nums = int(chaps_nums)
     return chaps_nums
